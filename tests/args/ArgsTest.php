@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Tdd\args\Args;
 use Tdd\args\BooleanOption;
 use Tdd\args\IntegerOption;
+use Tdd\args\StringOption;
 
 class ArgsTest extends TestCase
 {
@@ -50,6 +51,15 @@ class ArgsTest extends TestCase
         ];
         $option = Args::parse($schema, ['-p', 8080]);
         $this->assertSame(8080, $option->port());
+    }
+
+    public function test_get_string_as_option_value()
+    {
+        $schema = [
+            'directory' => [StringOption::class, 'd'],
+        ];
+        $option = Args::parse($schema, ['-d', '/usr/logs']);
+        $this->assertSame('/usr/logs', $option->directory());
     }
 
     public function test_example_1()
