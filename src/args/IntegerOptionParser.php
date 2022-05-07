@@ -2,9 +2,9 @@
 
 namespace Tdd\args;
 
-class StringOption
+class IntegerOptionParser
 {
-    public static function parse(string $flag, array $args): ?string
+    public static function parse(string $flag, array $args): ?int
     {
         foreach ($args as $key => $arg) {
             if ($arg === "-{$flag}") {

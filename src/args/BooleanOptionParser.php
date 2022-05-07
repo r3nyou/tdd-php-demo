@@ -2,7 +2,7 @@
 
 namespace Tdd\args;
 
-class BooleanOption
+class BooleanOptionParser
 {
     public static function parse(string $flag, array $args): bool
     {

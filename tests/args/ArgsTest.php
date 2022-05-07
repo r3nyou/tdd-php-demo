@@ -4,9 +4,9 @@ namespace Test\args;
 
 use PHPUnit\Framework\TestCase;
 use Tdd\args\Args;
-use Tdd\args\BooleanOption;
-use Tdd\args\IntegerOption;
-use Tdd\args\StringOption;
+use Tdd\args\BooleanOptionParser;
+use Tdd\args\IntegerOptionParser;
+use Tdd\args\StringOptionParser;
 
 class ArgsTest extends TestCase
 {
@@ -29,7 +29,7 @@ class ArgsTest extends TestCase
     public function test_set_boolean_option_false_if_flag_not_present()
     {
         $schema = [
-            'logging' => [BooleanOption::class, 'l'],
+            'logging' => [BooleanOptionParser::class, 'l'],
         ];
         $option = Args::parse($schema, []);
         $this->assertFalse($option->logging());
@@ -38,7 +38,7 @@ class ArgsTest extends TestCase
     public function test_set_boolean_option_true_if_flag_present()
     {
         $schema = [
-            'logging' => [BooleanOption::class, 'l'],
+            'logging' => [BooleanOptionParser::class, 'l'],
         ];
         $option = Args::parse($schema, ['-l']);
         $this->assertTrue($option->logging());
@@ -47,7 +47,7 @@ class ArgsTest extends TestCase
     public function test_parse_int_as_option_value()
     {
         $schema = [
-            'port' => [IntegerOption::class, 'p'],
+            'port' => [IntegerOptionParser::class, 'p'],
         ];
         $option = Args::parse($schema, ['-p', 8080]);
         $this->assertSame(8080, $option->port());
@@ -56,7 +56,7 @@ class ArgsTest extends TestCase
     public function test_get_string_as_option_value()
     {
         $schema = [
-            'directory' => [StringOption::class, 'd'],
+            'directory' => [StringOptionParser::class, 'd'],
         ];
         $option = Args::parse($schema, ['-d', '/usr/logs']);
         $this->assertSame('/usr/logs', $option->directory());
@@ -65,9 +65,9 @@ class ArgsTest extends TestCase
     public function test_example_1()
     {
         $schema = [
-            'logging' => [BooleanOption::class, 'l'],
-            'port' => [IntegerOption::class, 'p'],
-            'directory' => [StringOption::class, 'd'],
+            'logging' => [BooleanOptionParser::class, 'l'],
+            'port' => [IntegerOptionParser::class, 'p'],
+            'directory' => [StringOptionParser::class, 'd'],
         ];
         $option = Args::parse($schema, ['-l', '-p', '8080', '-d', '/usr/logs']);
         $this->assertTrue($option->logging());
