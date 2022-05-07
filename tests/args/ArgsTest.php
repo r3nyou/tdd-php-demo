@@ -5,6 +5,7 @@ namespace Test\args;
 use PHPUnit\Framework\TestCase;
 use Tdd\args\Args;
 use Tdd\args\BooleanOption;
+use Tdd\args\IntegerOption;
 
 class ArgsTest extends TestCase
 {
@@ -40,6 +41,15 @@ class ArgsTest extends TestCase
         ];
         $option = Args::parse($schema, ['-l']);
         $this->assertTrue($option->logging());
+    }
+
+    public function test_parse_int_as_option_value()
+    {
+        $schema = [
+            'port' => [IntegerOption::class, 'p'],
+        ];
+        $option = Args::parse($schema, ['-p', 8080]);
+        $this->assertSame(8080, $option->port());
     }
 
     public function test_example_1()
