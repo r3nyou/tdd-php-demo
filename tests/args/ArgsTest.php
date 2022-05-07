@@ -11,11 +11,11 @@ use Tdd\args\StringOption;
 class ArgsTest extends TestCase
 {
     /**
-     * multiple options: -l -p 8080 -d /usr/logs
      * single option
      *     bool -l
      *     integer -p 8080
      *     string -d /usr/logs
+     * multiple options: -l -p 8080 -d /usr/logs
      * sad path
      *     bool -l t, -l a t
      *     integer -p, -p 8080 8081
@@ -64,8 +64,6 @@ class ArgsTest extends TestCase
 
     public function test_example_1()
     {
-        $this->markTestSkipped();
-
         $schema = [
             'logging' => [BooleanOption::class, 'l'],
             'port' => [IntegerOption::class, 'p'],
