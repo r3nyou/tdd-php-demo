@@ -4,7 +4,7 @@ namespace Tdd\args;
 
 class BooleanOptionParser
 {
-    public static function parse(string $flag, array $args): bool
+    public static function parse(string $flag, array $args)
     {
         foreach ($args as $arg) {
             if ($arg === "-{$flag}") {

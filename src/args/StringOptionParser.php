@@ -2,15 +2,10 @@
 
 namespace Tdd\args;
 
-class StringOptionParser
+class StringOptionParser extends IntegerOptionParser
 {
-    public static function parse(string $flag, array $args): ?string
+    protected static function parseValue($param)
     {
-        foreach ($args as $key => $arg) {
-            if ($arg === "-{$flag}") {
-                return $args[$key + 1];
-            }
-        }
-        return null;
+        return (string) $param;
     }
 }
