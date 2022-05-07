@@ -24,6 +24,15 @@ class ArgsTest extends TestCase
      *     string: ""
      */
 
+    public function test_set_boolean_option_false_if_flag_not_present()
+    {
+        $schema = [
+            'logging' => [BooleanOption::class, 'l'],
+        ];
+        $option = Args::parse($schema, []);
+        $this->assertFalse($option->logging());
+    }
+
     public function test_set_boolean_option_true_if_flag_present()
     {
         $schema = [
