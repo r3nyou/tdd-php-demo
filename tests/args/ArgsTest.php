@@ -3,6 +3,7 @@
 namespace Test\args;
 
 use PHPUnit\Framework\TestCase;
+use Tdd\args\Args;
 
 class ArgsTest extends TestCase
 {
@@ -23,14 +24,16 @@ class ArgsTest extends TestCase
      */
 
 
-    public function test_should()
+    public function test_example_1()
     {
         $this->markTestSkipped();
-        /**
-         * Options $options
-         */
-        $options = Args::parse('l:b,p:d,d:s', '-l', '-p', '8080', '-d', '/usr/logs');
-        $options->logging();
-        $options->port();
+
+        $schema = [
+            'logging' => BooleanOption::class,
+            'port' => IntegerOption::class,
+            'directory' => StringOption::class,
+        ];
+        $option = Args::parse($schema, ['-l', '-p', '8080', '-d', '/usr/logs']);
+        $this->assertTrue($option->logging());
     }
 }
