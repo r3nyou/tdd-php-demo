@@ -12,8 +12,8 @@ class Args
             }
         };
 
-        foreach ($schema as $functionName => $callable) {
-            $option->{$functionName} = $callable($args);
+        foreach ($schema as $functionName => $parser) {
+            $option->{$functionName} = $parser[0]::parse($parser[1], $args);
         }
 
         return $option;

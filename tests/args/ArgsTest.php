@@ -4,6 +4,7 @@ namespace Test\args;
 
 use PHPUnit\Framework\TestCase;
 use Tdd\args\Args;
+use Tdd\args\BooleanOption;
 
 class ArgsTest extends TestCase
 {
@@ -22,16 +23,13 @@ class ArgsTest extends TestCase
      *     integer: 0
      *     string: ""
      */
-
     public function test_should_call_parser_in_schema_to_build_option()
     {
         $schema = [
-            'logging' => function ($args) { return $args; },
-            'port' => function ($args) { return $args; },
+            'logging' => [BooleanOption::class, 'l'],
         ];
         $option = Args::parse($schema, ['args']);
         $this->assertSame(['args'], $option->logging());
-        $this->assertSame(['args'], $option->port());
     }
 
     public function test_example_1()
@@ -39,9 +37,9 @@ class ArgsTest extends TestCase
         $this->markTestSkipped();
 
         $schema = [
-            'logging' => BooleanOption::parse('l'),
-            'port' => IntegerOption::parse('p'),
-            'directory' => StringOption::parse('d'),
+            'logging' => [BooleanOption::class, 'l'],
+            'port' => [IntegerOption::class, 'p'],
+            'directory' => [StringOption::class, 'd'],
         ];
         $option = Args::parse($schema, ['-l', '-p', '8080', '-d', '/usr/logs']);
         $this->assertTrue($option->logging());
