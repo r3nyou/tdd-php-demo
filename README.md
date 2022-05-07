@@ -1,4 +1,16 @@
-# PHP-TDD-DEMO
+# PHP TDD DEMO
+
+## set up
+```shell
+docker built -t php-tdd .
+docker run -it --rm -v "$PWD":/var/www php-tdd bash
+composer install
+```
+
+execute unit test
+```shell
+./vendor/bin/phpunit
+```
 
 ## Args
 This Kata is presented in Robert C.. Martin’s book “Clean Code”, chapter 14.
