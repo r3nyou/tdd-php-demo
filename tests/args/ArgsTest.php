@@ -23,13 +23,14 @@ class ArgsTest extends TestCase
      *     integer: 0
      *     string: ""
      */
-    public function test_should_call_parser_in_schema_to_build_option()
+
+    public function test_set_boolean_option_true_if_flag_present()
     {
         $schema = [
             'logging' => [BooleanOption::class, 'l'],
         ];
-        $option = Args::parse($schema, ['args']);
-        $this->assertSame(['args'], $option->logging());
+        $option = Args::parse($schema, ['-l']);
+        $this->assertTrue($option->logging());
     }
 
     public function test_example_1()
